@@ -28,7 +28,7 @@ jobs:
         working-directory: ./app/models
 
       - name: Build Docker image
-        run: docker build -t order-service-app .
+        run: docker build -t order-service-app ./app/models
 
       - name: Log in to DockerHub
         uses: docker/login-action@v2
