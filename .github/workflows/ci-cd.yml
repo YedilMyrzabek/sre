@@ -21,9 +21,11 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        working-directory: ./app/models
 
       - name: Run tests (optional)
-        run: echo "No tests yet"  # или: npm test
+        run: echo "No tests yet"
+        working-directory: ./app/models
 
       - name: Build Docker image
         run: docker build -t order-service-app .
