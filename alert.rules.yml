@@ -1,0 +1,20 @@
+groups:
+  - name: nodejs-alerts
+    rules:
+      - alert: HighErrorRate
+        expr: rate(http_request_duration_ms_count{code=~"5.."}[1m]) > 0.05
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Высокий уровень ошибок (5xx)"
+          description: "Ошибка 5xx > 5% за 1 мин."
+      
+      - alert: HighLatency
+        expr: histogram_quantile(0.95, rate(http_request_duration_ms_bucket[1m])) > 0.5
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Высокая задержка"
+          description: "Ответ более 500мс у 95% пользователей"
